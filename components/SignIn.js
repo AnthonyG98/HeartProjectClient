@@ -7,40 +7,46 @@ import {
   TouchableOpacity,
 } from "react-native";
 import React, { useContext, useState } from "react";
+import { UserContext } from "../UserContext";
 
 export function SignUp({ navigation }) {
-  const [text, setText] = useState("");
-
+  const {
+    fullName,
+    setFullname,
+    username,
+    setUsername,
+    password,
+    setPassword,
+  } = useContext(UserContext);
   return (
     <View style={styles.loginContainer}>
-      {/* <ImageBackground
+      <ImageBackground
         source={require("../Images/loginBackground.jpg")}
         resizeMode="cover"
         style={styles.loginBackground}
-      > */}
-      <TextInput
-        style={styles.loginInput}
-        placeholder={"Name"}
-        onChangeText={(newText) => setText(newText)}
-        defaultValue={text}
-      />
-      <TextInput
-        style={styles.loginInput}
-        placeholder={"Username"}
-        onChangeText={(newText) => setText(newText)}
-        defaultValue={text}
-      />
-      <TextInput
-        style={styles.loginInput}
-        placeholder={"Password"}
-        onChangeText={(newText) => setText(newText)}
-        defaultValue={text}
-      />
-      <TouchableOpacity
-        style={styles.loginBtn}
-        onPress={() => navigation.navigate("Dashboard", { name: "Dashboard" })}
       >
-        {/* <Button
+        <TextInput
+          style={styles.loginInput}
+          placeholder={"Name"}
+          onChangeText={(e) => setFullname(e)}
+        />
+        <TextInput
+          style={styles.loginInput}
+          placeholder={"Username"}
+          onChangeText={(e) => setUsername(e)}
+        />
+        <TextInput
+          style={styles.loginInput}
+          placeholder={"Password"}
+          onChangeText={(e) => setPassword(e)}
+        />
+        <TouchableOpacity
+          style={styles.loginBtn}
+          onPress={() =>
+            navigation.navigate("Dashboard", { name: "Dashboard" })
+          }
+        >
+          {/* <Button
             title="Login"
             color={"#EB7167"}
             style={styles.loginBtn}
@@ -48,15 +54,15 @@ export function SignUp({ navigation }) {
               navigation.navigate("Dashboard", { name: "Dashboard" })
             }
           /> */}
-        <Text style={styles.loginText}>Sign Up</Text>
-      </TouchableOpacity>
-      <Text style={styles.signIn}>
-        Already have an account?{" "}
-        <Text onPress={() => navigation.navigate("Login", { name: "Login" })}>
-          <Text style={styles.signInLink}>Login</Text>
+          <Text style={styles.loginText}>Sign Up</Text>
+        </TouchableOpacity>
+        <Text style={styles.signIn}>
+          Already have an account?
+          <Text onPress={() => navigation.navigate("Login", { name: "Login" })}>
+            <Text style={styles.signInLink}>Login</Text>
+          </Text>
         </Text>
-      </Text>
-      {/* </ImageBackground> */}
+      </ImageBackground>
     </View>
   );
 }

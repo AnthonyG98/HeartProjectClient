@@ -4,17 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons/faMagnifyingGlass";
 import { faUser } from "@fortawesome/free-solid-svg-icons/faUser";
 
-import {
-  Text,
-  TextInput,
-  View,
-  StyleSheet,
-  ImageBackground,
-  Image,
-  Button,
-  TouchableHighlightComponent,
-  TouchableOpacity,
-} from "react-native";
+import { Text, TextInput, View, StyleSheet } from "react-native";
 
 const homeIcon = require("../Images/home.png");
 const searchIcon = require("../Images/search.png");
