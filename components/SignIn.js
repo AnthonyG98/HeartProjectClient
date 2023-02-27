@@ -6,18 +6,43 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
+import axios from "axios";
 import React, { useContext, useState } from "react";
 import { UserContext } from "../UserContext";
 
 export function SignUp({ navigation }) {
-  const {
-    fullName,
-    setFullname,
-    username,
-    setUsername,
-    password,
-    setPassword,
-  } = useContext(UserContext);
+  let url = "http://localhost:3001";
+  // const {
+  //   fullName,
+  //   setFullname,
+  //   username,
+  //   setUsername,
+  //   password,
+  //   setPassword,
+  // } = useContext(UserContext);
+  const [fullName, setFullname] = useState();
+  const [username, setUsername] = useState();
+  const [password, setPassword] = useState();
+  const onSignUp = () => {
+    const signUpData = {
+      fullname: fullName,
+      username: username,
+      password: password,
+      profile_picture: "default_nlfrji",
+    };
+    let headers = {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    };
+    axios
+      .post(`${url}/users`, signUpData, headers)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => console.log(error));
+  };
   return (
     <View style={styles.loginContainer}>
       <ImageBackground
@@ -43,23 +68,16 @@ export function SignUp({ navigation }) {
         <TouchableOpacity
           style={styles.loginBtn}
           onPress={() =>
-            navigation.navigate("Dashboard", { name: "Dashboard" })
+            // navigation.navigate("Dashboard", { name: "Dashboard" })
+            onSignUp()
           }
         >
-          {/* <Button
-            title="Login"
-            color={"#EB7167"}
-            style={styles.loginBtn}
-            onPress={() =>
-              navigation.navigate("Dashboard", { name: "Dashboard" })
-            }
-          /> */}
           <Text style={styles.loginText}>Sign Up</Text>
         </TouchableOpacity>
         <Text style={styles.signIn}>
           Already have an account?
           <Text onPress={() => navigation.navigate("Login", { name: "Login" })}>
-            <Text style={styles.signInLink}>Login</Text>
+            <Text style={styles.signInLink}> Login</Text>
           </Text>
         </Text>
       </ImageBackground>
