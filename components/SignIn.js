@@ -12,17 +12,15 @@ import { UserContext } from "../UserContext";
 
 export function SignUp({ navigation }) {
   let url = "http://localhost:3001";
-  // const {
-  //   fullName,
-  //   setFullname,
-  //   username,
-  //   setUsername,
-  //   password,
-  //   setPassword,
-  // } = useContext(UserContext);
-  const [fullName, setFullname] = useState();
-  const [username, setUsername] = useState();
-  const [password, setPassword] = useState();
+  const {
+    fullName,
+    setFullname,
+    username,
+    setUsername,
+    password,
+    setPassword,
+  } = useContext(UserContext);
+
   const onSignUp = () => {
     const signUpData = {
       fullname: fullName,
@@ -39,7 +37,7 @@ export function SignUp({ navigation }) {
     axios
       .post(`${url}/users`, signUpData, headers)
       .then((response) => {
-        console.log(response);
+        navigation.navigate("Dashboard", { name: "Dashboard" });
       })
       .catch((error) => console.log(error));
   };
