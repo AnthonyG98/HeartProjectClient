@@ -4,7 +4,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons/faMagnifyingGlass";
 import { faUser } from "@fortawesome/free-solid-svg-icons/faUser";
 
-import { Text, TextInput, View, StyleSheet } from "react-native";
+import {
+  Text,
+  TextInput,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
 
 const homeIcon = require("../Images/home.png");
 const searchIcon = require("../Images/search.png");
@@ -14,10 +20,13 @@ const Dashboard = ({ navigation }) => {
   return (
     <View style={styles.dashboardContainer}>
       <View style={styles.searchContainer}>
-        <TextInput style={styles.searchInput} />
+        {/* <TextInput style={styles.searchInput} /> */}
+
+        <Text style={styles.title}>TITLE</Text>
         <FontAwesomeIcon
           icon={faMagnifyingGlass}
           onPress={() => alert("hey")}
+          style={styles.searchIcon}
         />
       </View>
       <DashboardProps
@@ -25,7 +34,9 @@ const Dashboard = ({ navigation }) => {
         dashHead={"Anthony"}
         dashText={"Hello there"}
       />
-      <FontAwesomeIcon icon={faUser} />
+      <TouchableOpacity style={styles.userContainer}>
+        <FontAwesomeIcon style={styles.userIcon} size={30} icon={faUser} />
+      </TouchableOpacity>
     </View>
   );
 };
@@ -40,8 +51,41 @@ const styles = StyleSheet.create({
     width: "100%",
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "space-between",
+    backgroundColor: "#BA4A3F",
+    paddingTop: "15%",
+    paddingBottom: 5,
+  },
+  title: {
+    fontSize: 25,
+    color: "#fff",
+    marginLeft: 5,
+    fontWeight: "bold",
+  },
+  searchIcon: {
+    fontSize: 35,
+    color: "#fff",
+    marginRight: 5,
+    backgroundColor: "#FF8597",
+    padding: 10,
+    borderRadius: 90,
+  },
+  userContainer: {
+    width: 75,
+    height: 75,
+    backgroundColor: "#FFF",
+    borderWidth: 1,
+    borderColor: "#FF8597",
+    display: "flex",
+    alignItems: "center",
+    borderRadius: 90,
     justifyContent: "center",
-    marginTop: "13%",
+    position: "fixed",
+    bottom: 3,
+    right: 3,
+  },
+  userIcon: {
+    color: "#FF8597",
   },
 });
 export default Dashboard;

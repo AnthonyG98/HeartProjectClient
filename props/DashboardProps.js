@@ -15,9 +15,12 @@ const styles = StyleSheet.create({
   dashboardPropsContainer: {
     display: "flex",
     flexDirection: "row",
-    marginTop: "10%",
+    marginTop: "2%",
+    paddingBottom: "2%",
     justifyContent: "flex-start",
     alignItems: "center",
+    borderBottomWidth: 1,
+    borderBottomColor: "#E0E0E0",
   },
   dashImg: {
     width: 60,

@@ -12,7 +12,28 @@ import { UserContext } from "../UserContext";
 
 const Login = ({ navigation }) => {
   const [text, setText] = useState("");
+  let url = "http://localhost:3001";
+  const { username, setUsername, password, setPassword } =
+    useContext(UserContext);
 
+  const onLogin = () => {
+    const loginData = {
+      username: username,
+      password: password,
+    };
+    let headers = {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    };
+    axios
+      .post(`${url}/users/login`, loginData, headers)
+      .then((response) => {
+        navigation.navigate("Dashboard", { name: "Dashboard" });
+      })
+      .catch((error) => console.log(error));
+  };
   const message = useContext(UserContext);
   return (
     <View style={styles.loginContainer}>
@@ -24,14 +45,12 @@ const Login = ({ navigation }) => {
         <TextInput
           style={styles.loginInput}
           placeholder={"Username"}
-          onChangeText={(newText) => setText(newText)}
-          defaultValue={text}
+          onChangeText={(e) => setUsername(e)}
         />
         <TextInput
           style={styles.loginInput}
           placeholder={"Password"}
-          onChangeText={(newText) => setText(newText)}
-          defaultValue={text}
+          onChangeText={(e) => setPassword(e)}
         />
         <TouchableOpacity
           style={styles.loginBtn}
@@ -43,9 +62,7 @@ const Login = ({ navigation }) => {
         </TouchableOpacity>
         <Text style={styles.signIn}>
           Are you a new user?{" "}
-          <Text
-            onPress={() => navigation.navigate("SignUp", { name: "SignUp" })}
-          >
+          <Text onPress={() => onLogin()}>
             <Text style={styles.signInLink}>Sign Up</Text>
           </Text>
         </Text>
