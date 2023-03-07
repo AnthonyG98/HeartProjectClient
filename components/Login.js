@@ -8,6 +8,7 @@ import {
   Button,
   TouchableOpacity,
 } from "react-native";
+import axios from "axios";
 import { UserContext } from "../UserContext";
 
 const Login = ({ navigation }) => {
@@ -30,7 +31,9 @@ const Login = ({ navigation }) => {
     axios
       .post(`${url}/users/login`, loginData, headers)
       .then((response) => {
-        navigation.navigate("Dashboard", { name: "Dashboard" });
+        if (response.data === "Success") {
+          navigation.navigate("Dashboard", { name: "Dashboard" });
+        }
       })
       .catch((error) => console.log(error));
   };
@@ -52,17 +55,16 @@ const Login = ({ navigation }) => {
           placeholder={"Password"}
           onChangeText={(e) => setPassword(e)}
         />
-        <TouchableOpacity
-          style={styles.loginBtn}
-          onPress={() =>
-            navigation.navigate("Dashboard", { name: "Dashboard" })
-          }
-        >
+        <TouchableOpacity style={styles.loginBtn} onPress={() => onLogin()}>
           <Text style={styles.loginText}>Login</Text>
         </TouchableOpacity>
         <Text style={styles.signIn}>
           Are you a new user?{" "}
-          <Text onPress={() => onLogin()}>
+          <Text
+            onPress={() =>
+              navigation.navigate("Dashboard", { name: "Dashboard" })
+            }
+          >
             <Text style={styles.signInLink}>Sign Up</Text>
           </Text>
         </Text>
