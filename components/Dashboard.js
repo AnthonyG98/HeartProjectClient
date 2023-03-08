@@ -34,13 +34,22 @@ const Dashboard = ({ navigation }) => {
         dashHead={"Anthony"}
         dashText={"Hello there"}
       />
-      <TouchableOpacity style={styles.userContainer}>
-        <FontAwesomeIcon style={styles.userIcon} size={30} icon={faUser} />
-      </TouchableOpacity>
+      <View style={styles.dashNavContainer}>
+        <TouchableOpacity>
+          <FontAwesomeIcon size={30} icon={faUser} />
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <FontAwesomeIcon size={30} icon={faUser} />
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <FontAwesomeIcon size={30} icon={faUser} />
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
 const styles = StyleSheet.create({
+  body: {},
   dashboardContainer: {},
   searchInput: {
     borderWidth: 1,
@@ -52,7 +61,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    backgroundColor: "#BA4A3F",
+    backgroundColor: "#007980",
     paddingTop: "15%",
     paddingBottom: 5,
   },
@@ -66,7 +75,7 @@ const styles = StyleSheet.create({
     fontSize: 35,
     color: "#fff",
     marginRight: 5,
-    backgroundColor: "#FF8597",
+    backgroundColor: "#03A366",
     padding: 10,
     borderRadius: 90,
   },

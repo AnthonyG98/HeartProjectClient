@@ -7,6 +7,7 @@ import {
   ImageBackground,
   Button,
   TouchableOpacity,
+  AsyncStorage,
 } from "react-native";
 import axios from "axios";
 import { UserContext } from "../UserContext";
@@ -16,7 +17,6 @@ const Login = ({ navigation }) => {
   let url = "http://localhost:3001";
   const { username, setUsername, password, setPassword } =
     useContext(UserContext);
-
   const onLogin = () => {
     const loginData = {
       username: username,
@@ -31,6 +31,13 @@ const Login = ({ navigation }) => {
     axios
       .post(`${url}/users/login`, loginData, headers)
       .then((response) => {
+        _storeData = async () => {
+          try {
+            await AsyncStorage.setItem("username", loginData.username);
+          } catch (error) {
+            console.log(error);
+          }
+        };
         if (response.data === "Success") {
           navigation.navigate("Dashboard", { name: "Dashboard" });
         }
@@ -41,7 +48,7 @@ const Login = ({ navigation }) => {
   return (
     <View style={styles.loginContainer}>
       <ImageBackground
-        source={require("../Images/loginBackground.jpg")}
+        source={require("../Images/home.jpg")}
         resizeMode="cover"
         style={styles.loginBackground}
       >
@@ -100,7 +107,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     width: "80%",
     borderRadius: 100,
-    backgroundColor: "#BA4A3F",
+    backgroundColor: "#03A366",
   },
   loginText: {
     fontSize: 30,
@@ -119,7 +126,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   signInLink: {
-    color: "#BA4A3F",
+    color: "#04B36F",
     fontSize: 25,
     fontWeight: "500",
   },
